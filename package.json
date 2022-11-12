@@ -1,0 +1,25 @@
+{
+  "name": "ikh-nodejs",
+  "version": "1.0.0",
+  "description": "Creating a website using NodeJS with MVC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m-masliukh/ikh-nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/m-masliukh/ikh-nodejs/issues"
+  },
+  "homepage": "https://github.com/m-masliukh/ikh-nodejs#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2"
+  }
+}
