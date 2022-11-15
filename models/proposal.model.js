@@ -7,10 +7,14 @@ module.exports = (sequelize, Sequelize) => {
         description: {
             type: Sequelize.TEXT,
             allowNull: false
-          }
+          },
+        contactId: {
+            type: Sequelize.INTEGER
+        }
         }, {
           timestamps: false
         });
     
     return Proposal;
   };
+

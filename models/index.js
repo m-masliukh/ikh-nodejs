@@ -18,4 +18,10 @@ db.proposals = require("./proposal.model.js")(sequelize, Sequelize);
 db.contacts = require("./contact.model.js")(sequelize, Sequelize);
 db.news = require("./news.model.js")(sequelize, Sequelize);
 
+db.contacts.hasMany(db.proposals, { as: "proposals" });
+db.proposals.belongsTo(db.contacts, {
+    foreignKey: "contactId",
+    as: "contact",
+  });
+
 module.exports = db;

@@ -9,11 +9,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         date: {
             type: Sequelize.DATEONLY
-          },
-        isAccepted: {
-            type: Sequelize.BOOLEAN,
-            allowNull: false
-        }
+          }
         }, {
           timestamps: false
         });
