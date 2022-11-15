@@ -24,4 +24,10 @@ db.proposals.belongsTo(db.contacts, {
     as: "contact",
   });
 
+db.contacts.hasMany(db.news, { as: "news" });
+db.news.belongsTo(db.contacts, {
+    foreignKey: "source",
+    as: "contact",
+  });
+
 module.exports = db;
