@@ -1,3 +1,4 @@
+const acceptedNewsList = require("../../posts_realiz/acceptedNewsList");
 
 export default class SearchRealization {
 

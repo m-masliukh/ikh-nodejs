@@ -1,8 +1,17 @@
 import { findAll } from "../controllers/contact.controller";
 
 export default class contacts_list{
+    _contacts = null;
+    
     constructor(){
-        this.contacts = findAll();
+        //this._contacts = findAll();
+    }
+
+    getInstance() {
+        if (this._contacts == null) {
+            this._contacts = findAll();
+        }
+        return this._contacts;
     }
 
     addValuesToDatatlist(id){

@@ -1,10 +1,17 @@
 export default class NewsList{
-    _news = [];
+    _news = null;
     
     constructor(){
-        this._news = new Array();
+        //this._news = new Array();
     }
     
+    getInstance() {
+        if (_news == null) {
+            this._news = new Array();
+        }
+        return this._news;
+    }
+
     get items(){
         if(this._news === ""){
             throw new Error('Не знайдено пропозицій новин');
