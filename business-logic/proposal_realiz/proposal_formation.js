@@ -2,11 +2,18 @@ import { create, findAll } from "../controllers/proposal.controller";
 import { proposals } from "../models";
 import proposalModel from "../models/proposal.model";
 
+const instance = axios.create({
+    baseURL: "http://localhost:8080/api",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
 export default class proposal_formation{
     construnctor(){
-        this.name=document.getElementById("prop_name");
-        this.desc=document.getElementById("prop_name");
-        this.contact=document.getElementById("prop_name");
+        this.name=document.getElementById("prop_name").value;
+        this.desc=document.getElementById("prop_desc").value;
+        this.contact=document.getElementById("prop_contact").value;
         this.getIdByName();
     }
 
@@ -25,7 +32,7 @@ export default class proposal_formation{
                 data: res.data,
               };
         
-              this.contactId =  data.Id;
+              this.contactId =  res.data[0].Id;
             } catch (err) {
                 console.log(err);
             }
