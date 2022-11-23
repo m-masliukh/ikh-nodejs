@@ -14,9 +14,9 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.proposals = require("./proposal.model.js")(sequelize, Sequelize);
-db.contacts = require("./contact.model.js")(sequelize, Sequelize);
-db.news = require("./news.model.js")(sequelize, Sequelize);
+db.proposals = require("./proposal.model.cjs")(sequelize, Sequelize);
+db.contacts = require("./contact.model.cjs")(sequelize, Sequelize);
+db.news = require("./news.model.cjs")(sequelize, Sequelize);
 
 db.contacts.hasMany(db.proposals, { as: "proposals" });
 db.proposals.belongsTo(db.contacts, {

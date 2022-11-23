@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Creating a website using NodeJS with MVC",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "develop": "node server.js"
+    "develop": "node server.cjs"
   },
   "repository": {
     "type": "git",
@@ -19,11 +20,23 @@
   },
   "homepage": "https://github.com/m-masliukh/ikh-nodejs#readme",
   "dependencies": {
+    "axios": "^1.2.0",
+    "browserify": "^17.0.0",
+    "consolidate": "^0.16.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
+    "fixed": "^0.3.1",
+    "mustache": "^4.2.0",
+    "node-schedule": "^2.1.0",
     "sequelize": "^6.25.5",
-    "tedious": "^15.1.1"
+    "sheetdb-node": "^0.0.12",
+    "tedious": "^15.1.1",
+    "qs": "^6.11.0",
+    "require": "^0.4.4"
+  },
+  "devDependencies": {
+    "polymer-cli": "^1.9.11"
   }
 }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>New contact and proposal</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <div class="container my-3" style="max-width: 600px">
+
+      <form id="propForm">
+        <h3>Оформлення пропозиції</h3>
+            
+        <div>
+            <label for="propTitle">Назва:</label>
+            <input type="text" id="propTitle" name="propTitle" />
+        </div>  
+
+        <div>
+            <label for="propEmail">Пошта:</label>
+            <input type="email" id="propEmail" name="propEmail" />
+        </div>  
+
+        <div>
+            <label for="propPhone">Телефон:</label>
+            <input type="text" id="propPhone" name="propPhone" />
+        </div>
+        
+        <div>
+            <label for="propBody">Текст:</label>
+            <textarea form="propForm" id="propBody" name="propBody"></textarea><br>
+        </div>
+        
+        <div>
+            <label for="propFile">Файл: </label>
+            <input type="file" id="propFile" name="propFile" multiple /><br>
+        </div>
+
+        <input type="button" id="propSubmit" value="Сформувати" onclick="submitProposal()" />
+
+    </form>
+
+    <form id="contForm">
+      <h3>Додавання контакту</h3>
+          
+      <div>
+          <label for="contName">Назва:</label>
+          <input type="text" id="contName" name="contName" />
+      </div>  
+
+      <div>
+          <label for="contEmail">Пошта:</label>
+          <input type="email" id="contEmail" name="contEmail" />
+      </div>  
+
+      <div>
+          <label for="contPhone">Телефон:</label>
+          <input type="text" id="contPhone" name="contPhone" />
+      </div>
+      
+      <div>
+          <label for="contType">Тип:</label>
+          <input type="radio" id="contTypeGrom" name="contType" value="Громадська організація" checked>
+          <label for="html">Громадська організація</label><br>
+          <input type="radio" id="contTypeVol" name="contType" value="Волонтерська організація">
+          <label for="css">Волонтерська організація</label><br>
+      </div>
+
+      <input type="button" id="contSubmit" value="Додати" onclick="submitContact()" />
+
+  </form>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </body>
+</html>

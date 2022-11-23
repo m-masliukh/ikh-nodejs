@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../models/index.cjs");
 const Proposal = db.proposals;
 const Op = db.Sequelize.Op;
 
@@ -15,7 +15,8 @@ exports.create = (req, res) => {
     // Create a Proposal
     const proposal = {
         name: req.body.name,
-        description: req.body.description
+        description: req.body.description,
+        contactId: req.body.contactId
     };
     
     // Save Proposal in the database

@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../models/index.cjs");
 const News = db.news;
 const Op = db.Sequelize.Op;
 
