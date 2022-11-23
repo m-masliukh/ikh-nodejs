@@ -11,9 +11,9 @@ const instance = axios.create({
 
 export default class proposal_formation{
     construnctor(){
-        this.name=document.getElementById("prop_name");
-        this.desc=document.getElementById("prop_name");
-        this.contact=document.getElementById("prop_name");
+        this.name=document.getElementById("prop_name").value;
+        this.desc=document.getElementById("prop_desc").value;
+        this.contact=document.getElementById("prop_contact").value;
         this.getIdByName();
     }
 
