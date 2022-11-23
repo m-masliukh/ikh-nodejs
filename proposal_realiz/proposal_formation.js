@@ -25,7 +25,7 @@ export default class proposal_formation{
                 data: res.data,
               };
         
-              this.contactId =  res.data.Id;
+              this.contactId =  res.data[0].Id;
             } catch (err) {
                 console.log(err);
             }
