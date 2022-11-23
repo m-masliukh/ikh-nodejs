@@ -39,8 +39,12 @@
   <div class="container">
     <h3>Уся пошта <span class="badge badge-secondary"></span></h3>
     <hr>
-    <a href="https://mail.google.com/mail/?view=cm&fs=1" target="_blank" class="btn btn-primary pull-right">Написати</a>
+    <div style="margin-bottom: 20px;">
+    <a href="https://mail.google.com/mail/?view=cm&fs=1" target="_blank" class="btn btn-primary pull-left">Написати</a>
     <a href="" id="replyLink" hidden></a>
+    <input type="button" value = "Шукати" class="btn btn-success pull-right" id="searchMsgBtn"> 
+    <input type="text" placeholder="Пошук..." class=" pull-right" id="searchInput" style="height: 35px; width: 280px; margin-right: 8px">
+    </div>
     <table class="table table-striped table-inbox">
       <thead>
         <tr>

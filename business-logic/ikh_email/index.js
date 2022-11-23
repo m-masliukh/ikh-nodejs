@@ -1,63 +1,53 @@
 import { GmailAPI } from "./email_api.js";
+import { MsgDisplayConfig } from "./msgDisplayConfig.js"
 
 var gmailAPIObj = new GmailAPI();
+var msgDisplayConfig = new MsgDisplayConfig();
+class MsgScanner{
+   
 
-function getHeader(headers, index) {
-    var header = '';
-    $.each(headers, function(){
-      if(this.name.toLowerCase() === index.toLowerCase()){
-        header = this.value;
-      }
-    });
-    return header;
-  }
- 
-  function getHTMLPart(arr) {
-        for(var x = 0; x <= arr.length; x++)
-        {
-          if(typeof arr[x].parts === 'undefined')
-          {
-            if(arr[x].mimeType === 'text/html')
-            {
-              return arr[x].body.data;
-            }
-          }
-          else
-          {
-            return getHTMLPart(arr[x].parts);
-          }
-        }
-        return '';
-      }
-      
-function getBody(message) {
-        var encodedBody = '';
-        if(typeof message.parts === 'undefined')
-        {
-          encodedBody = message.body.data;
-        }
-        else
-        {
-          encodedBody = getHTMLPart(message.parts);
-          console.log(encodedBody)
-        }
-        encodedBody = encodedBody.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
-        var decoded = decodeURIComponent(encodeURIComponent(window.atob(encodedBody)));
-        console.log(decoded)
-        return decoded;
-      }
-      
-function appendMessageRow(message) {
+  static readInboxContent = async (msgId) => {
+    const message = await gmailAPIObj.readGmailContent(msgId);
+    MsgScanner.appendMessageRow(message); 
+  };
+
+  static readAllMessages = async() =>{
+    var config = {
+        method: "get",
+        url: `https://gmail.googleapis.com/gmail/v1/users/me/messages`,
+        headers: {
+          Authorization: `Bearer ${await gmailAPIObj.accessToken}`,
+          
+        },
+      };
+  
+      var data = {};
+  
+      await axios(config)
+        .then(async function (response) {
+          
+          data = await response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+        data.messages.forEach(element => {
+            MsgScanner.readInboxContent(element.id);
+        });
+
+  };
+  static appendMessageRow(message) {
     $('.table-inbox tbody').append(
         '<tr>\
-          <td>'+getHeader(message.payload.headers, 'From')+'</td>\
+          <td>'+msgDisplayConfig.getHeader(message.payload.headers, 'From')+'</td>\
           <td>\
             <a href="#message-modal-' + message.id +
               '" data-toggle="modal" id="message-link-' + message.id+'">' +
-              getHeader(message.payload.headers, 'Subject') +
+              msgDisplayConfig.getHeader(message.payload.headers, 'Subject') +
             '</a>\
           </td>\
-          <td>'+getHeader(message.payload.headers, 'Date')+'</td>\
+          <td>'+msgDisplayConfig.getHeader(message.payload.headers, 'Date')+'</td>\
         </tr>'
       );
     $('body').append(
@@ -66,7 +56,7 @@ function appendMessageRow(message) {
         <div class="modal-content">\
           <div class="modal-header">\
           <h4 class="modal-title" id="myModalLabel">' +
-    getHeader(message.payload.headers, 'Subject') +
+          msgDisplayConfig.getHeader(message.payload.headers, 'Subject') +
             '</h4>\
           <button type="button"\
           class="close"\
@@ -88,39 +78,55 @@ function appendMessageRow(message) {
     );
     $('#message-link-'+message.id).on('click', function(){
         var ifrm = $('#message-iframe-'+message.id)[0].contentWindow.document;
-        $('body', ifrm).html(getBody(message.payload));
+        $('body', ifrm).html(msgDisplayConfig.getBody(message.payload));
         
       });
   }
+
+}
+    
+
+var searchMsgBtn = document.getElementById('searchMsgBtn');
+  searchMsgBtn.onclick = async () => {
+  var searchTerm = document.getElementById('searchInput').value;
+  if(searchTerm != ''){
+  $('.table-inbox tbody').empty();
+  var config1 = {
+    method: "get",
+    url:
+      "https://www.googleapis.com/gmail/v1/users/me/messages?q=" + searchTerm,
+    headers: {
+      Authorization: `Bearer ${await gmailAPIObj.accessToken} `,
+    },
+  };
+  var threadId = '';
+
+  await axios(config1)
+    .then(async function (response) {
+      threadId = await response.data["messages"][0].id;
+
+      console.log(threadId);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   
-var readInboxContent = async (msgId) => {
-    const message = await gmailAPIObj.readGmailContent(msgId);
-    appendMessageRow(message); 
+    
+      MsgScanner.readInboxContent(threadId);
+ 
+
+  }
+else{
+  alert('Поле для пошуку порожнє!')
+}
+};
+
+var searchInput = document.getElementById('searchInput');
+  searchInput.onfocusout = () => {
+    if(searchInput.value == ''){
+      $('.table-inbox tbody').empty();
+      MsgScanner.readAllMessages();
+    }
   };
 
-var readAllMessages = async() =>{
-    var config = {
-        method: "get",
-        url: `https://gmail.googleapis.com/gmail/v1/users/me/messages`,
-        headers: {
-          Authorization: `Bearer ${await gmailAPIObj.accessToken}`,
-        },
-      };
-  
-      var data = {};
-  
-      await axios(config)
-        .then(async function (response) {
-          data = await response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
-        data.messages.forEach(element => {
-            readInboxContent(element.id);
-        });
-
-  };
-
-readAllMessages();
+MsgScanner.readAllMessages();
