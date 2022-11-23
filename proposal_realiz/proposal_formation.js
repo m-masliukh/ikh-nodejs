@@ -2,6 +2,13 @@ import { create, findAll } from "../controllers/proposal.controller";
 import { proposals } from "../models";
 import proposalModel from "../models/proposal.model";
 
+const instance = axios.create({
+    baseURL: "http://localhost:8080/api",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
 export default class proposal_formation{
     construnctor(){
         this.name=document.getElementById("prop_name");
