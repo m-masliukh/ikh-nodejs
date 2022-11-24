@@ -10,6 +10,19 @@ export default class SearchRealization {
 
     search() {
         var newsArrObj = [];
+        newsAccordion = document.getElementById("newsAccordion");
+        newsAccordion.innerHTML += `
+                                    <div>
+                                    <button id="rejectBtn" class="reject">
+                                    <i class="material-icons" style="font-size:27px; vertical-align: middle;">close</i>
+                                        <span>Відхилити</span>
+                                    </button>
+                                    <button id="acceptBtn" class="accept" style="float:center">
+                                    <i class="material-icons" style="font-size:27px; vertical-align: middle;">&#xE147;</i>
+                                        <span>Прийняти</span>
+                                    </button>
+                                    </div>`;
+                                    
         for (var k = 0; k < this.termsCount; ++k) {
             var oReq = new XMLHttpRequest();
             var searchUrl = 'https://www.googleapis.com/customsearch/v1?' +
@@ -33,25 +46,16 @@ export default class SearchRealization {
 
                         let news = `<div class="card">
                             <div class="card-header" id="heading${index}">
+                            <input type="checkbox" name="newsCheckbox" value="${element['link']}" />
                                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse${index}"
                                     aria-expanded="false" aria-controls="collapse${index}">
-                                   <b id="title${index}">Пропозиція:</b> ${element["title"]}
+                                   <b>Пропозиція:</b> ${element["title"]}
                                 </button>
                                 
                                 <div id="collapse${index}" class="collapse" aria-labelledby="heading${index}" data-parent="#newsAccordion">
-                                <div class="card-body"> ${element["snippet"]}. <a href="${element['link']}" id="source${index}" target="_blank" >Read more here</a>  </div>
+                                <div class="card-body"> ${element["snippet"]}. <a href="${element['link']}" target="_blank" >Read more here</a>  </div>
                                 </div>
                                 <br>
-                                <div>
-                                <button id="rejectBtn${index}" class="reject">
-                                <i class="material-icons" style="font-size:27px; vertical-align: middle;">close</i>
-                                    <span>Відхилити</span>
-                                </button>
-                                <button id="acceptBtn${index}" class="accept" style="float:center" onclick="acceptNews(${index})">
-                                <i class="material-icons" style="font-size:27px; vertical-align: middle;">&#xE147;</i>
-                                    <span>Прийняти</span>
-                                </button>
-                                </div>
                             </div>
 
                             
