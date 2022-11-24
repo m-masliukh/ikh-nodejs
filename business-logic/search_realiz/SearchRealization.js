@@ -1,4 +1,4 @@
-const acceptedNewsList = require("../../posts_realiz/acceptedNewsList");
+//const acceptedNewsList = require("../posts_realiz/acceptedNewsList");
 
 export default class SearchRealization {
 
@@ -10,18 +10,6 @@ export default class SearchRealization {
 
     search() {
         var newsArrObj = [];
-        newsAccordion = document.getElementById("newsAccordion");
-        newsAccordion.innerHTML += `
-                                    <div>
-                                    <button id="rejectBtn" class="reject">
-                                    <i class="material-icons" style="font-size:27px; vertical-align: middle;">close</i>
-                                        <span>Відхилити</span>
-                                    </button>
-                                    <button id="acceptBtn" class="accept" style="float:center">
-                                    <i class="material-icons" style="font-size:27px; vertical-align: middle;">&#xE147;</i>
-                                        <span>Прийняти</span>
-                                    </button>
-                                    </div>`;
                                     
         for (var k = 0; k < this.termsCount; ++k) {
             var oReq = new XMLHttpRequest();
@@ -53,7 +41,7 @@ export default class SearchRealization {
                                 </button>
                                 
                                 <div id="collapse${index}" class="collapse" aria-labelledby="heading${index}" data-parent="#newsAccordion">
-                                <div class="card-body"> ${element["snippet"]}. <a href="${element['link']}" target="_blank" >Read more here</a>  </div>
+                                <div class="card-body"> ${element["snippet"]}. <a href="${element['link']}" target="_blank" class="card-source">Read more here</a>  </div>
                                 </div>
                                 <br>
                             </div>

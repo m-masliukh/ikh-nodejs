@@ -3,7 +3,7 @@ export default class TermModel {
         this.searchTerms = [] 
     }
     init = async () => {
-        return await axios.get('https://sheetdb.io/api/v1/h62awsnm53okw?sheet=search_words')
+        return await axios.get('https://sheetdb.io/api/v1/2yrgha5d1g1ba?sheet=search_words')
             .then(response => response.data)
             .then(data => {
                 this.searchTerms = data;
@@ -23,8 +23,8 @@ export default class TermModel {
 
     _commit(searchTerms_) {
         this.onTermsChanged(searchTerms_) //show changed on ui
-        axios.delete('https://sheetdb.io/api/v1/h62awsnm53okw/all?sheet=search_words');
-        axios.post('https://sheetdb.io/api/v1/h62awsnm53okw?sheet=search_words', {
+        axios.delete('https://sheetdb.io/api/v1/2yrgha5d1g1ba/all?sheet=search_words');
+        axios.post('https://sheetdb.io/api/v1/2yrgha5d1g1ba?sheet=search_words', {
             "data": searchTerms_ });  //post changed to storage
     }
 

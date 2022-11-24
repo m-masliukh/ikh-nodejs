@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>ІКХ</title>
 
-    <script type="module" src="../sheet-api.js"></script>
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -16,11 +16,12 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
+    <script type="module" src="./sheet-api.js"></script>
     
 </head>
 
   <body>
-    <div id="root">
+    <div id="root" style="margin: 20px 100px;">
       <button class="btn btn-success" type="button" id="searchBtn">Search</button>
         <div id="termDiv" style="width: 40%; margin: 50px 10px;">
             <form method="post" id="termForm" name="termForm">
@@ -47,6 +48,16 @@
 
             </ul>
         </div>
+        <div>
+          <button id="rejectBtn" class="reject">
+          <i class="material-icons" style="font-size:27px; vertical-align: middle;">close</i>
+              <span>Відхилити</span>
+          </button>
+          <button id="acceptBtn" class="accept" style="float:center">
+          <i class="material-icons" style="font-size:27px; vertical-align: middle;">&#xE147;</i>
+              <span>Прийняти</span>
+          </button>
+          </div>
         <div class="container my-3">
             <h3>Результати моніторингу <span class="badge badge-secondary"></span></h3>
             <hr>

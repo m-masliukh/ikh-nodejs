@@ -5,7 +5,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         source: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         },
         date: {
             type: Sequelize.DATEONLY

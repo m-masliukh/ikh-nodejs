@@ -49,12 +49,29 @@ searchLink.onclick = function(){
     }); 
 }
 
-async function acceptNews(index) {
-  let resultElement = document.getElementById(`acceptBtn${index}`);
-  
-  const text = document.getElementById(`title${index}`).value;
-  const source = document.getElementById(`source${index}`).value;
-  const date = Date.now(); //document.getElementById("post-phone").value;
+const instance = axios.create({
+  baseURL: "http://localhost:8080/api",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+var acceptBtn = document.getElementById('acceptBtn');
+
+acceptBtn.onclick = function(){
+  var newsCards = document.getElementsByClassName("card-header");
+  for (var news of newsCards) {
+    if (news.getElementsByTagName("input")[0].checked) {
+      const text = news.getElementsByClassName("card-body")[0].textContent;
+      const source = news.getElementsByClassName("card-body")[0]
+                         .getElementsByClassName("card-source")[0].href;
+      acceptNews(text, source);
+    }
+  }
+}
+
+async function acceptNews(text, source) {
+  const date = Date.now();
   
   try {
     const res = await instance.post("/news", {
@@ -68,10 +85,8 @@ async function acceptNews(index) {
       headers: res.headers,
       data: res.data,
     };
-  
-    //resultElement.innerHTML = htmlizeResponse(result);
   } catch (err) {
-    //resultElement.innerHTML = htmlizeResponse(err);
+    console.log(err);
   }
 }
 

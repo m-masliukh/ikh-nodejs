@@ -16,8 +16,7 @@ exports.create = (req, res) => {
     const news = {
         text: req.body.text,
         source: req.body.source,
-        date: req.body.date,
-        isAccepted: req.body.isAccepted
+        date: req.body.date
     };
     
     // Save News in the database
