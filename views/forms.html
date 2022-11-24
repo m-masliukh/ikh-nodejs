@@ -1,77 +1,130 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>New contact and proposal</title>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="index.js"></script>
-  </head>
-  <body>
-    <div class="container my-3" style="max-width: 600px">
-
-      <form id="propForm">
-        <h3>Оформлення пропозиції</h3>
-            
-        <div>
-            <label for="propTitle">Назва:</label>
-            <input type="text" id="propTitle" name="propTitle" />
-        </div>  
-
-        <div>
-            <label for="propEmail">Пошта:</label>
-            <input type="email" id="propEmail" name="propEmail" />
-        </div>  
-
-        <div>
-            <label for="propPhone">Телефон:</label>
-            <input type="text" id="propPhone" name="propPhone" />
+ 
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>New contact and proposal</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="index.js"></script>
+  <link rel=”stylesheet” href=”https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css” />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="module" src="server.js"></script>
+</head>
+ 
+<body>
+  <nav>
+    <a href="index.html" style="color: #fff">
+      <p class="h2">Інформаційно-комунікаційний хаб</p>
+    </a>
+    <ul>
+      <li>
+        <a href="forms.html">
+          <i class="bi bi-chat-left-text" aria-hidden="true" title="Зв'язок"></i>
+        </a>
+      </li>
+      <li>
+        <a href="gmail-api.html">
+          <i class="bi bi-envelope" aria-hidden="true" title="Надіслати листа"></i>
+        </a>
+      </li>
+      <li>
+        <a href="sheet-api.html">
+          <i class="bi bi-globe" aria-hidden="true" title="Моніторинг"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="col-6" style="margin-left: 2rem">
+    <h3 class="h3">Оформлення пропозиції</h3>
+    <div id="main">
+      <form id="proposition_form" class="proposition_form" name="proposition_form">
+        <div class="form-group">
+          <label for="prop_name" class="form_label">Назва:</label>
+          <input type="text" plaseholder="Назва пропозиції" id="prop_name" class="form-control" name="prop_name" />
         </div>
-        
-        <div>
-            <label for="propBody">Текст:</label>
-            <textarea form="propForm" id="propBody" name="propBody"></textarea><br>
+ 
+        <div class="form-group">
+          <label for="prop_desc" class="form_label">Опис:</label>
+          <input type="text" plaseholder="Опис пропозиції" id="prop_desc" class="form-control" name="prop_desc" />
         </div>
-        
-        <div>
-            <label for="propFile">Файл: </label>
-            <input type="file" id="propFile" name="propFile" multiple /><br>
+ 
+        <div class="form-group">
+          <label for="prop_contact" class="form_label">Організація:</label>
+          <input list="contact_list" plaseholder="Назва організації" id="prop_contact" class="form-control"
+            name="prop_contact" /><br />
+          <datalist id="contact_list"></datalist>
         </div>
-
-        <input type="button" id="propSubmit" value="Сформувати" onclick="submitProposal()" />
-
-    </form>
-
+      </form>
+ 
+      <div id="contacts_container"></div>
+      <div class="form-group">
+        <label for="propFile">Файл: </label>
+        <input type="file" id="propFile" name="propFile" multiple class="btn" /><br />
+      </div>
+ 
+      <input type="button" id="propSubmit" value="Сформувати" class="btn btn-primary" onclick="submitProposal()" />
+    </div>
+  </div>
+ 
+  <div class="col-6" style="margin-left: 2rem; margin-top: 2rem">
     <form id="contForm">
-      <h3>Додавання контакту</h3>
-          
-      <div>
-          <label for="contName">Назва:</label>
-          <input type="text" id="contName" name="contName" />
-      </div>  
-
-      <div>
-          <label for="contEmail">Пошта:</label>
-          <input type="email" id="contEmail" name="contEmail" />
-      </div>  
-
-      <div>
-          <label for="contPhone">Телефон:</label>
-          <input type="text" id="contPhone" name="contPhone" />
+      <h3 class="h3">Додавання контакту</h3>
+ 
+      <div class="form-group">
+        <label for="contName">Назва:</label>
+        <input type="text" id="contName" name="contName" class="form-control" />
       </div>
-      
-      <div>
-          <label for="contType">Тип:</label>
-          <input type="radio" id="contTypeGrom" name="contType" value="Громадська організація" checked>
-          <label for="html">Громадська організація</label><br>
-          <input type="radio" id="contTypeVol" name="contType" value="Волонтерська організація">
-          <label for="css">Волонтерська організація</label><br>
+ 
+      <div class="form-group">
+        <label for="contEmail">Пошта:</label>
+        <input type="email" id="contEmail" name="contEmail" class="form-control" />
       </div>
-
-      <input type="button" id="contSubmit" value="Додати" onclick="submitContact()" />
-
-  </form>
-
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  </body>
+ 
+      <div class="form-group">
+        <label for="contPhone">Телефон:</label>
+        <input type="text" id="contPhone" name="contPhone" class="form-control" />
+      </div>
+ 
+      <div class="form-group">
+        <label for="contType" style="margin-right: 2rem">Тип:</label>
+        <input type="radio" id="contTypeGrom" name="contType" value="Громадська організація" checked />
+        <label for="html" style="margin-right: 2rem">Громадська організація</label>
+        <input type="radio" id="contTypeVol" name="contType" value="Волонтерська організація" />
+        <label for="css">Волонтерська організація</label>
+      </div>
+ 
+      <input type="button" id="contSubmit" value="Додати" class="btn btn-primary" onclick="submitContact()"
+        style="margin-bottom: 2rem" />
+    </form>
+  </div>
+ 
+  <footer class="bg-light footer text-lg-start">
+    <div class="p-3" style="
+          background: rgb(2, 0, 36);
+          background: linear-gradient(
+            90deg,
+            rgba(2, 0, 36, 1) 0%,
+            rgba(9, 9, 121, 1) 35%,
+            rgba(0, 212, 255, 1) 100%
+          );
+          color: #fff;
+        ">
+      © 2022 PZ-42
+    </div>
+  </footer>
+ 
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+ 
 </html>
