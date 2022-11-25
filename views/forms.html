@@ -19,7 +19,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script type="module" src="server.js"></script>
+  <script type="module" src="../server.js"></script>
 </head>
  
 <body>
@@ -50,19 +50,19 @@
     <div id="main">
       <form id="proposition_form" class="proposition_form" name="proposition_form">
         <div class="form-group">
-          <label for="prop_name" class="form_label">Назва:</label>
-          <input type="text" plaseholder="Назва пропозиції" id="prop_name" class="form-control" name="prop_name" />
+          <label for="propTitle" class="form_label">Назва:</label>
+          <input type="text" id="propTitle" plaseholder="Назва пропозиції" class="form-control" name="propTitle" />
         </div>
  
         <div class="form-group">
-          <label for="prop_desc" class="form_label">Опис:</label>
-          <input type="text" plaseholder="Опис пропозиції" id="prop_desc" class="form-control" name="prop_desc" />
+          <label for="propBody" class="form_label">Опис:</label>
+          <input type="text" id="propBody" plaseholder="Опис пропозиції" class="form-control" name="propBody" />
         </div>
  
         <div class="form-group">
-          <label for="prop_contact" class="form_label">Організація:</label>
-          <input list="contact_list" plaseholder="Назва організації" id="prop_contact" class="form-control"
-            name="prop_contact" /><br />
+          <label for="propContact" class="form_label">Організація:</label>
+          <input list="contact_list" id="propContact" plaseholder="Назва організації" class="form-control"
+            name="propContact" /><br />
           <datalist id="contact_list"></datalist>
         </div>
       </form>

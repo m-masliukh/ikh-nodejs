@@ -38,9 +38,9 @@ exports.findAll = (req, res) => {
     const name = req.query.name;
     const email = req.query.email;
     const type = req.query.type;
-    var condition = name ? { name: { [Op.like]: `%${name}%` } } :
-                  (email ? { email: { [Op.like]: `%${email}`}} :
-                   (type ? { type: { [Op.like]: `%${type}`}} : null));
+    var condition = { name: { [Op.like]: `%${name}%` } };
+                  // (email ? { email: { [Op.like]: `%${email}`}} :
+                  //  (type ? { type: { [Op.like]: `%${type}`}} : null));
   
     Contact.findAll({ where: condition })
       .then(data => {

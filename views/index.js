@@ -214,55 +214,27 @@ const instance = axios.create({
     }
   }
 
-  async function getContactByData(email = "", phone = "") { 
-    if (!email) {
+  async function getContactByName(name) { 
       try {
         const res = await instance.get("/contacts", {
           params: {
-            phone: phone
-          }
-        });
-        return res;
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    else if (!phone) {
-      try {
-        const res = await instance.get("/contacts", {
-          params: {
-            email: email
-          }
-        });
-        return res;
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    else {
-      try {
-        const res = await instance.get("/contacts", {
-          params: {
-            email: email,
-            phone: phone
+            name: name
           }
         });
         return res.data[0];
       } catch (err) {
         console.log(err);
       }
-    }
   }
 
   async function submitProposal() {
     const name = document.getElementById("propTitle").value;
-    const email = document.getElementById("propEmail").value;
-    const phone = document.getElementById("propPhone").value;
+    const contactName = document.getElementById("propContact").value;
     const text = document.getElementById("propBody").value;
     const file = document.getElementById("propFile").value;
     
     try {
-      const contact = await getContactByData(email, phone);
+      const contact = await getContactByName(contactName);
       if (contact.id == undefined) {
         throw new Error();
       }
