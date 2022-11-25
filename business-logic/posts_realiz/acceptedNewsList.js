@@ -77,7 +77,7 @@ export default class acceptedNewsList{
 
     showNewsForRegistered(id){
         i=id.replace('sendToCabinet','');
-        fs.appendFile('log.txt', this.acceptedNews[i], 'utf-8', err => {
+        fs.appendFile('log.txt', this.acceptedNews[i].source, 'utf-8', err => {
             if (err) {
               throw err;
             }

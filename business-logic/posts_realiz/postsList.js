@@ -5,6 +5,11 @@ const instance = axios.create({
     },
   });
 
+function onLoad(){
+    let _postList = new postsList();
+    _postList.makeHtmlList('news_container');
+}
+
 export default class postsList{
     constructor(){
         this.posts = this.getAllPosts();
@@ -12,8 +17,6 @@ export default class postsList{
 
     async getAllPosts(){
         
-        let resultElement = document.getElementById("getResult");
-        resultElement.innerHTML = "";
     
         try {
         const res = await instance.get("/news");
