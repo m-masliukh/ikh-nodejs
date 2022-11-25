@@ -1,18 +1,26 @@
 <html lang="en">
-
+ 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel=”stylesheet” href=”https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css” />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+ 
+  <script type="module" src="server.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+ 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.5.1/qs.min.js"></script>
   <style>
@@ -31,19 +39,43 @@
     })();
   </script>
 </head>
-
+ 
 <body>
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+  <nav>
+    <a href="index.html" style="color: #fff">
+      <p class="h2">Інформаційно-комунікаційний хаб</p>
+    </a>
+    <ul>
+      <li>
+        <a href="forms.html">
+          <i class="bi bi-chat-left-text" aria-hidden="true" title="Зв'язок"></i>
+        </a>
+      </li>
+      <li>
+        <a href="gmail-api.html">
+          <i class="bi bi-envelope" aria-hidden="true" title="Надіслати листа"></i>
+        </a>
+      </li>
+      <li>
+        <a href="sheet-api.html">
+          <i class="bi bi-globe" aria-hidden="true" title="Моніторинг"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+ 
   <div class="container">
     <h3>Уся пошта <span class="badge badge-secondary"></span></h3>
-    <hr>
-    <div style="margin-bottom: 20px;">
-    <a href="https://mail.google.com/mail/?view=cm&fs=1" target="_blank" class="btn btn-primary pull-left">Написати</a>
-    <a href="" id="replyLink" hidden></a>
-    <input type="button" value = "Шукати" class="btn btn-success pull-right" id="searchMsgBtn"> 
-    <input type="text" placeholder="Пошук..." class=" pull-right" id="searchInput" style="height: 35px; width: 280px; margin-right: 8px">
+    <hr />
+    <div style="margin-bottom: 20px">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1" target="_blank" class="btn btn-primary pull-left p-2"
+        style="margin-bottom: 1.5rem;">Написати</a>
+      <a href="" id="replyLink" hidden></a>
+      <input type="button" value="Шукати" class="btn btn-success pull-right" id="searchMsgBtn" />
+      <input type="text" placeholder="Пошук..." class="pull-right form-control" id="searchInput"
+        style="height: 35px; width: 280px; margin-right: 8px" />
     </div>
     <table class="table table-striped table-inbox">
       <thead>
@@ -56,9 +88,7 @@
       <tbody></tbody>
     </table>
   </div>
-
-
-
+ 
   <div class="modal" id="reply-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -67,34 +97,52 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-
         </div>
         <form onsubmit="">
           <input type="hidden" id="reply-message-id" />
-
+ 
           <div class="modal-body">
             <div class="form-group">
               <input type="text" class="form-control" id="reply-to" disabled />
             </div>
-
+ 
             <div class="form-group">
               <input type="text" class="form-control disabled" id="reply-subject" disabled />
             </div>
-
+ 
             <div class="form-group">
               <textarea class="form-control" id="reply-message" placeholder="Message" rows="10" required></textarea>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
-            </div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Закрити
+            </button>
+          </div>
         </form>
       </div>
     </div>
   </div>
-
-
+ 
+  <br>
+  <br>
+ 
+  <footer class="bg-light footer text-lg-start">
+    <div class="p-3" style="
+          background: rgb(2, 0, 36);
+          background: linear-gradient(
+            90deg,
+            rgba(2, 0, 36, 1) 0%,
+            rgba(9, 9, 121, 1) 35%,
+            rgba(0, 212, 255, 1) 100%
+          );
+          color: #fff;
+        ">
+      © 2022 PZ-42
+    </div>
+  </footer>
+ 
   <script type="module" src="/business-logic/ikh_email/index.js"></script>
 </body>
-
+ 
 </html>
